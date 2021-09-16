@@ -2,21 +2,21 @@ package se331.lab.rest.util;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-import se331.lab.rest.entity.Event;
-import se331.lab.rest.entity.EventDTO;
-import se331.lab.rest.entity.Organizer;
-import se331.lab.rest.entity.OrganizerDTO;
+import se331.lab.rest.entity.AuctionItem;
+import se331.lab.rest.entity.AuctionItemDTO;
+import se331.lab.rest.entity.Bid;
+import se331.lab.rest.entity.BidDTO;
 
 import java.util.List;
 
 @Mapper
 public interface LabMapper {
     LabMapper INSTANCE = Mappers.getMapper(LabMapper.class);
-    EventDTO getEventDto(Event event);
-    List<EventDTO> getEventDto(List<Event> events);
+    AuctionItemDTO getEventDto(AuctionItem event);
+    List<AuctionItemDTO> getEventDto(List<AuctionItem> events);
 
-    OrganizerDTO getOrganizerDTO(Organizer organizer);
-    List<OrganizerDTO> getOrganizerDTO(List<Organizer> organizers);
+    BidDTO getOrganizerDTO(Bid organizer);
+    List<BidDTO> getOrganizerDTO(List<Bid> organizers);
 
 
 }

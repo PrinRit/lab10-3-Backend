@@ -2,10 +2,9 @@ package se331.lab.rest.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -16,6 +15,12 @@ public class AuctionItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
+    Long id;
     String description;
     String type;
+    @OneToMany(mappedBy = "item")
+    @Builder.Default
+    List<Bid> bids = new ArrayList<>();
+    @OneToOne
+    Bid successfulBid;
 }

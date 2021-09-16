@@ -4,76 +4,113 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-import se331.lab.rest.entity.Event;
-import se331.lab.rest.entity.Organizer;
-import se331.lab.rest.repository.EventRepository;
-import se331.lab.rest.repository.OrganizerRepository;
-import se331.lab.rest.repository.ParticipantRepository;
+import se331.lab.rest.entity.AuctionItem;
+import se331.lab.rest.entity.Bid;
+import se331.lab.rest.repository.AuctionItemRepository;
+import se331.lab.rest.repository.BidRepository;
 
 import javax.transaction.Transactional;
 
 @Component
 public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     @Autowired
-    EventRepository eventRepository;
+    AuctionItemRepository auctionItemRepository;
     @Autowired
-    OrganizerRepository organizerRepository;
-    @Autowired
-    ParticipantRepository participantRepository;
+    BidRepository bidRepository;
+
     @Override
     @Transactional
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-        Organizer org1,org2,org3;
-        org1 = organizerRepository.save(Organizer.builder()
-                .name("CAMT").build());
-        org2 = organizerRepository.save(Organizer.builder()
-                .name("CMU").build());
-        org3 = organizerRepository.save(Organizer.builder()
-        .name("ChiangMai").build());
-        Event tempEvent;
-        tempEvent = eventRepository.save(Event.builder()
-                .category("Academic")
-                .title("Midterm Exam")
-                .description("A time for taking the exam")
-                .location("CAMT Building")
-                .date("3rd Sept")
-                .time("3.00-4.00 pm.")
-                .petAllowed(false)
+
+        Bid bid1,bid2,bid3,bid4,bid5,bid6;
+        bid1 = bidRepository.save(Bid.builder().amount(5).datetime("2021-01-01").build());
+        bid2 = bidRepository.save(Bid.builder().amount(10).datetime("2021-02-02").build());
+        bid3 = bidRepository.save(Bid.builder().amount(15).datetime("2021-03-03").build());
+        bid4 = bidRepository.save(Bid.builder().amount(20).datetime("2021-04-04").build());
+        bid5 = bidRepository.save(Bid.builder().amount(25).datetime("2021-05-05").build());
+        bid6 = bidRepository.save(Bid.builder().amount(30).datetime("2021-06-06").build());
+
+        AuctionItem Auc1,Auc2,Auc3,Auc4,Auc5;
+
+        Auc1 = auctionItemRepository.save(AuctionItem.builder()
+                .description("The Dominictoratto")
+                .type("Money")
                 .build());
-        tempEvent.setOrganizer(org1);
-        org1.getOwnEvents().add(tempEvent);
-        tempEvent = eventRepository.save(Event.builder()
-                .category("Academic")
-                .title("Commencement Day")
-                .description("A time for celebration")
-                .location("CMU Convention hall")
-                .date("21th Jan")
-                .time("8.00am-4.00 pm.")
-                .petAllowed(false)
+        bid1.setItem(Auc1);
+        Auc1.getBids().add(bid1);
+        Auc1.setSuccessfulBid(bid1);
+
+        bid2.setItem(Auc1);
+        Auc1.getBids().add(bid2);
+        Auc1.setSuccessfulBid(bid2);
+
+        bid3.setItem(Auc1);
+        Auc1.getBids().add(bid3);
+        Auc1.setSuccessfulBid(bid3);
+
+        Auc2 = auctionItemRepository.save(AuctionItem.builder()
+                .description("The gold king Anudabe")
+                .type("Gold")
                 .build());
-        tempEvent.setOrganizer(org1);
-        org1.getOwnEvents().add(tempEvent);
-        tempEvent = eventRepository.save(Event.builder()
-                .category("Cultural")
-                .title("Loy Krathong")
-                .description("A time for Krathong")
-                .location("Ping River")
-                .date("21th Nov")
-                .time("8.00-10.00 pm.")
-                .petAllowed(false)
+        bid4.setItem(Auc2);
+        Auc2.getBids().add(bid4);
+        Auc2.setSuccessfulBid(bid4);
+
+        bid5.setItem(Auc2);
+        Auc2.getBids().add(bid5);
+        Auc2.setSuccessfulBid(bid5);
+
+        bid6.setItem(Auc2);
+        Auc2.getBids().add(bid6);
+        Auc2.setSuccessfulBid(bid6);
+
+        Auc3 = auctionItemRepository.save(AuctionItem.builder()
+                .description("A bigest electricity shop")
+                .type("Silver")
                 .build());
-        tempEvent.setOrganizer(org2);
-        org2.getOwnEvents().add(tempEvent);
-        tempEvent = eventRepository.save(Event.builder()
-                .category("Cultural")
-                .title("Songkran")
-                .description("Let's Play Water")
-                .location("Chiang Mai Moat")
-                .date("13th April")
-                .time("10.00am - 6.00 pm.")
-                .petAllowed(true)
+        bid2.setItem(Auc3);
+        Auc3.getBids().add(bid2);
+        Auc3.setSuccessfulBid(bid2);
+
+        bid3.setItem(Auc3);
+        Auc3.getBids().add(bid3);
+        Auc3.setSuccessfulBid(bid3);
+
+        bid4.setItem(Auc3);
+        Auc3.getBids().add(bid4);
+        Auc3.setSuccessfulBid(bid4);
+
+        Auc4 = auctionItemRepository.save(AuctionItem.builder()
+                .description("A King of Mumbai")
+                .type("Money")
                 .build());
-        tempEvent.setOrganizer(org3);
-        org3.getOwnEvents().add(tempEvent);
+        bid1.setItem(Auc4);
+        Auc4.getBids().add(bid1);
+        Auc4.setSuccessfulBid(bid1);
+
+        bid5.setItem(Auc4);
+        Auc4.getBids().add(bid5);
+        Auc4.setSuccessfulBid(bid5);
+
+        bid6.setItem(Auc4);
+        Auc4.getBids().add(bid6);
+        Auc4.setSuccessfulBid(bid6);
+
+        Auc5 = auctionItemRepository.save(AuctionItem.builder()
+                .description("Operators")
+                .type("Gold")
+                .build());
+        bid3.setItem(Auc5);
+        Auc5.getBids().add(bid3);
+        Auc5.setSuccessfulBid(bid3);
+
+        bid5.setItem(Auc5);
+        Auc5.getBids().add(bid5);
+        Auc5.setSuccessfulBid(bid5);
+
+        bid6.setItem(Auc5);
+        Auc5.getBids().add(bid6);
+        Auc5.setSuccessfulBid(bid6);
+
     }
 }
