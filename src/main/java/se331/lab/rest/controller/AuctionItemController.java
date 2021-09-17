@@ -21,14 +21,14 @@ public class AuctionItemController {
     @GetMapping("auctionItems")
     public ResponseEntity<?> getAuctionItemLists(@RequestParam(value = "_limit", required = false) Integer perPage
             , @RequestParam(value = "_page", required = false) Integer page,
-        @RequestParam(value= "description", required = false) String description) {
+        @RequestParam(value= "amount", required = false) Integer amount) {
         perPage = perPage == null?3 : perPage;
         page = page == null?1 : page;
         Page<AuctionItem> pageOutput;
-        if (description == null){
+        if (amount == null) {
             pageOutput = auctionItemService.getAuctionItems(perPage, page);
-        }else{
-            pageOutput = auctionItemService.getAuctionItems(description, PageRequest.of(page-1,perPage));
+        } else {
+            pageOutput = auctionItemService.getAuctionItems(amount, PageRequest.of(page - 1, perPage));
         }
         HttpHeaders responseHeader = new HttpHeaders();
         responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
